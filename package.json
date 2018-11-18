@@ -1,14 +1,22 @@
 {
-  "name": "fernetchat",
+  "name": "proyecto-chat",
   "version": "1.0.0",
-  "description": "",
+  "description": "my first repository\r This is my first chat project and I'm left unfinished. I have to check it again.",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src"
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dani4983/proyecto-chat.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dani4983/proyecto-chat/issues"
+  },
+  "homepage": "https://github.com/dani4983/proyecto-chat#readme",
   "dependencies": {
     "express": "^4.16.4",
     "socket.io": "^2.1.1"
