@@ -8,16 +8,20 @@
 
     <!-- FONT AWESOME -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Acme" rel="stylesheet">
+
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body>
     <!-- NAVBAR -->
-    <nav class="navbar navbar-info">
+    <nav class="navbar">
       <a class="navbar-brand mx-auto" id="titulo" href="/">Fernet Chats</a>
     </nav>
 
-    <div id="nickWrap" class="card col-md-5 mx-auto my-5">
+    <div id="nickWrap" class="card col-md-5 bg-transparent text-white border-danger mx-auto my-5">
       <div class="card-header">
         <h3>Ingrese su nombre</h3>
       </div>
@@ -35,21 +39,14 @@
     <div class="container" id="contentWrap">
       <div class="row">
          <!-- USERS SECTION  -->
-       <div class="card mb-5 mt-3">
-           <div class="card-header">
-             <h4>Usuarios</h4>
-           </div>
-           <div class="card-body">
-             <div id="usernames"></div>
-           </div>
-        </div>
+       
 
-        <div class="col-md-8 offset-md-1">
+        <div class="col-md-8">
           <!-- CHAT CONTAINER -->
-          <div class="card mb-5 mt-3">
-            <!-- CARD HEADER
+          <div class="card bg-transparent text-white border-danger mb-5 mt-3">
+            <!-- CARD HEADER-->
             <div class="card-header">
-              <h4>Chats</h3>
+              <h4>Chats</h4>
             </div>
 
             <!-- CARD BODY  -->
@@ -68,7 +65,16 @@
             </form>
           </div>
         </div>
-
+        <div class="col-md-4">
+          <div class="card bg-transparent text-white border-danger mb-5 mt-3">
+            <div class="card-header">
+              <h4>Usuarios</h4>
+            </div>
+            <div class="card-body">
+              <div id="usernames"></div>
+            </div>
+         </div>
+        </div>
 
       </div>
 

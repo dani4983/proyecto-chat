@@ -1,54 +1,90 @@
 $(function () {
-   const socket = io();
-//obteniendo elementos del DOM desde la interfaz
-    const $messageForm = $('#message-form');
-    const $messageBox = $('#message');
-    const $chat = $('#chat');
 
-//obteniendo elementos del DOM desde el nicknameForm
-    const $nickForm = $('#nickForm');
-    const $nickError = $('#nickError');
-    const $nickname = $('#nickname');
+   // socket.io client side connection
+   const socket = io.connect();
 
-    const $users = $('#usernames');
+   // obtaining DOM elements from the Chat Interface
+   const $messageForm = $('#message-form');
+   const $messageBox = $('#message');
+   const $chat = $('#chat');
 
-    $nickForm.submit(e => {
+   // obtaining DOM elements from the NicknameForm Interface
+   const $nickForm = $('#nickForm');
+   const $nickError = $('#nickError');
+   const $nickname = $('#nickname');
+
+   // obtaining the usernames container DOM
+   const $users = $('#usernames');
+
+   $nickForm.submit(e => {
       e.preventDefault();
       socket.emit('new user', $nickname.val(), data => {
-         if(data) {
-            $('#nickWrap'). hide();
-            $('#contentWrap'). show();
+         if (data) {
+            $('#nickWrap').hide();
+            $('#contentWrap').show();
          } else {
-            $nickError. html(`
-               <div class="alert alert-danger">
-               Este usuario ya existe</div>
-            `)
+            $nickError.html(`
+                <div class="alert alert-danger">
+                Este usuario ya existe</div>
+            `);
          }
-         $nickname.val('');
-      })
-   })
+      });
+      $nickname.val('');
+   });
 
-   //eventos
-
-   $messageForm.submit( e => {
+   // events
+   $messageForm.submit(e => {
       e.preventDefault();
       socket.emit('send message', $messageBox.val(), data => {
          $chat.append(`<p class="error">${data}</p>`)
-      }),
+      });
       $messageBox.val('');
    });
 
-   socket.on('new message', function (data) {
-      $chat.append('<b>'+ data.nick + '</b>: ' + data.msg + '<br/>');
+   socket.on('new message', data => {
+      displayMsg(data);
    });
+
    socket.on('usernames', data => {
-      var html = '';
-      for (let i = 0; i < data.length; i++) {
-         html += `<p><i class="fas fa-user"></i> ${data[i]}</p>`
+      let html = '';
+      for (i = 0; i < data.length; i++) {
+         html += `<p><img src="../img/user.png" style="width: 12%"> ${data[i]}</p>`;
       }
       $users.html(html);
    });
-   socket.on('whisper',data => {
-      $chat.append(`<p class="whisper"><i class="fas fa-user-secret"></i><b> ${data.nick}:</b> ${data.msg}</p>`)
-   })
+
+   socket.on('whisper', data => {
+      $chat.append(`<p class="whisper"><img src="../img/person.png" style="width: 9%"> <b>${data.nick}</b>: ${data.msg}</p>`);
+   });
+
+
+   socket.on('load old msgs', msgs => {
+      for (let i = msgs.length - 1; i >= 0; i--) {
+         displayMsg(msgs[i]);
+      }
+   });
+
+
+   function addZero(i) {
+      if (i < 10) {
+        i = "0" + i;
+      }
+      return i;
+    }
+
+   function hora() {
+      var d = new Date();
+    
+      var h = addZero(d.getHours());
+      var m = addZero(d.getMinutes());
+      var s = addZero(d.getSeconds());
+      return h + ":" + m + ":" + s;
+      
+   }
+   
+
+   function displayMsg(data) {
+      $chat.append(`<p class="msg"><b>${data.nick}</b>: ${data.msg} &emsp;${hora().fontcolor("green")}</p>`);
+   }
+
 });

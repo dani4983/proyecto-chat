@@ -4,6 +4,7 @@
   "description": "my first repository\r This is my first chat project and I'm left unfinished. I have to check it again.",
   "main": "index.js",
   "scripts": {
+    "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   },
   "repository": {
@@ -19,7 +20,8 @@
   "homepage": "https://github.com/dani4983/proyecto-chat#readme",
   "dependencies": {
     "express": "^4.16.4",
-    "socket.io": "^2.1.1"
+    "mongoose": "^5.4.17",
+    "socket.io": "^2.2.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.6"
